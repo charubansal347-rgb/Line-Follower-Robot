@@ -1,4 +1,3 @@
-# Line-Follower-Robot
 Line Follower Robot Using Arduino
 Objective
 To design and implement an autonomous line follower robot using an Arduino microcontroller that can detect and follow a predefined path using infrared (IR) sensors.
@@ -45,6 +44,6 @@ Add PID control algorithm for smoother tracking
 Use multiple sensors for better accuracy
 Integrate obstacle detection
 Author
-Kriti Soni
-B.E. Electronics & Communication Engineering
+Charu bansal
+B.E. Electronics & Electrical Engineering
 MBM University, Jodhpur
