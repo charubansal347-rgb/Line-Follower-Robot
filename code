@@ -1,0 +1,114 @@
+int BLACK = 0;
+int WHITE = 1;
+
+const int MR_1 = 4;     //RIGHT MOTOR 
+const int MR_2 = 2; 
+const int MR_PWM = 3; 
+
+const int ML_1 = 6;     //LEFT MOTOR
+const int ML_2 =7;
+const int ML_PWM = 5;
+
+const int SR = A5;        //RIGHT SENSOR
+const int SL = A4;        // LEFT SENSOR
+
+const int SR_W = 1;       
+const int SR_B = 0;     
+
+const int SL_W = 1;
+const int SL_B = 0;
+
+int SD_R;               //Read Right Sensor
+int SD_L;               //Read Left Sensor
+
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(MR_1, OUTPUT);
+  pinMode(MR_2, OUTPUT);
+  pinMode(MR_PWM, OUTPUT);
+  pinMode(ML_1, OUTPUT);
+  pinMode(ML_2, OUTPUT);
+  pinMode(ML_PWM, OUTPUT);
+  pinMode(SR, INPUT);
+  pinMode(SL, INPUT);
+
+  Serial.begin(9600);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+  SD_R = digitalRead(SR);
+  SD_L = digitalRead(SL);
+  
+
+
+  if(SD_L == BLACK && SD_R == BLACK){                 //BOTH STOP
+
+    MR_STOP();
+    ML_STOP();
+
+    delay(100);
+
+
+  } else if(SD_L == WHITE && SD_R == WHITE) {         //BOTH RUN
+
+    MOTOR_LEFT();
+    MOTOR_RIGHT();
+
+    delay(100);
+
+  } else if(SD_L == BLACK && SD_R == WHITE){          //RIGHT RUN, LEFT STOP (LEFT TURN)
+    MOTOR_RIGHT();
+    ML_STOP();
+    delay(100);
+
+  } else {                                            //LEFT RUN, RIGHT STOP (RIGHT TURN)
+    MOTOR_LEFT();
+    MR_STOP();
+    delay(100);
+
+  }
+
+  delay(200);
+
+}
+
+void MOTOR_RIGHT(){
+
+  //analogWrite(MR_PWM , 100);
+  digitalWrite(MR_1, LOW);
+  digitalWrite(MR_2, HIGH);
+
+}
+
+void MOTOR_LEFT(){
+  
+  //analogWrite(ML_PWM , 100);
+  digitalWrite(ML_1, LOW);
+  digitalWrite(ML_2, HIGH);
+
+}
+
+
+void MR_STOP(){
+  
+
+  digitalWrite(MR_1, LOW);
+  digitalWrite(MR_2, LOW);
+
+  delay(100);
+
+
+}
+
+void ML_STOP(){
+    
+
+  digitalWrite(ML_1, LOW);
+  digitalWrite(ML_2, LOW);
+
+  delay(100);
+}
